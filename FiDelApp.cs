@@ -48,7 +48,7 @@ namespace FiDelApp
                 // Insert the JSON document into Cosmos DB
                 var response = await cosmosContainer.CreateItemAsync(requestDocument);
 
-                return new OkObjectResult("Data inserted successfully!");
+                return new OkObjectResult("Data inserted successfully! Well Done!");
             }
             catch (Exception ex)
             {
