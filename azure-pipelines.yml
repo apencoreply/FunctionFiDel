@@ -106,5 +106,5 @@ stages:
       displayName: 'Publish JMeter Test Results'
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '$(System.DefaultWorkingDirectory)/jmeter_results.jtl'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter_results.jtl'
         searchFolder: '$(System.DefaultWorkingDirectory)'
