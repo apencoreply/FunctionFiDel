@@ -100,7 +100,7 @@ stages:
           Expand-Archive -Path $jmeterZipPath -DestinationPath $jmeterExtractPath -Force
     
     - script: |
-        $jmeterBinPath = "$(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter.bat"
+        $jmeterBinPath = "$(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter"
         $jmeterTestPath = "$(System.DefaultWorkingDirectory)/*.jmx"
         $jtlFilePath = "$(System.DefaultWorkingDirectory)/jmeter_results.jtl"
 
