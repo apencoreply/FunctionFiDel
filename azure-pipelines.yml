@@ -100,7 +100,7 @@ stages:
           Expand-Archive -Path $jmeterZipPath -DestinationPath $jmeterExtractPath -Force
     
     - script: |
-        $(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter -n -t $(System.DefaultWorkingDirectory)/*.jmx -l $(System.DefaultWorkingDirectory)/jmeter_results.jtl > $(System.DefaultWorkingDirectory)/jmeter_summary.txt
+        $(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter -n -t $(System.DefaultWorkingDirectory)/*.jmx -l $(System.DefaultWorkingDirectory)/jmeter_results.jtl -j $(System.DefaultWorkingDirectory)/jmeter_summary.txt
       displayName: 'Run JMeter Test'
 
     # - task: PublishTestResults@2
