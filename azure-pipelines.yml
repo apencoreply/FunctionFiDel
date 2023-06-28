@@ -98,13 +98,18 @@ stages:
 
           Invoke-WebRequest -Uri $jmeterZipUrl -OutFile $jmeterZipPath
           Expand-Archive -Path $jmeterZipPath -DestinationPath $jmeterExtractPath -Force
+    
+    - script: |
+        $jmeterBinPath = "$(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter.bat"
+        $jmeterTestPath = "$(System.DefaultWorkingDirectory)/*.jmx"
+        $jtlFilePath = "$(System.DefaultWorkingDirectory)/jmeter_results.jtl"
 
-    - script: '$(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter -n -t $(System.DefaultWorkingDirectory)/*.jmx -l $(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter_results.jtl'
+        & $jmeterBinPath -n -t $jmeterTestPath -l $jtlFilePath
       displayName: 'Run JMeter Test'
 
     - task: PublishTestResults@2
       displayName: 'Publish JMeter Test Results'
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '$(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter_results.jtl'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/jmeter_results.jtl'
         searchFolder: '$(System.DefaultWorkingDirectory)'
