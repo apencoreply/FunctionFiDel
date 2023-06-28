@@ -74,3 +74,37 @@ stages:
               appType: functionApp
               appName: $(functionAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+
+- stage: Test
+  displayName: Test stage
+  dependsOn: Deploy
+  condition: succeeded()
+
+  jobs:
+  - job: Test
+    displayName: Test
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: PowerShell@2
+      displayName: 'Install Apache JMeter'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $jmeterZipUrl = 'https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.1.zip'
+          $jmeterZipPath = '$(System.DefaultWorkingDirectory)/jmeter.zip'
+          $jmeterExtractPath = '$(System.DefaultWorkingDirectory)/jmeter'
+
+          Invoke-WebRequest -Uri $jmeterZipUrl -OutFile $jmeterZipPath
+          Expand-Archive -Path $jmeterZipPath -DestinationPath $jmeterExtractPath -Force
+
+    - script: 'jmeter -n -t path/to/your/jmx/file.jmx -l $(System.DefaultWorkingDirectory)/jmeter_results.jtl'
+      displayName: 'Run JMeter Test'
+
+    - task: PublishTestResults@2
+      displayName: 'Publish JMeter Test Results'
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/jmeter_results.jtl'
+        searchFolder: '$(System.DefaultWorkingDirectory)'
