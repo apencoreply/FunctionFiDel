@@ -113,7 +113,7 @@
                 <connectTime>true</connectTime>
               </value>
             </objProp>
-            <stringProp name="filename">jmeter_results.jtl</stringProp>
+            <stringProp name="filename">$(System.DefaultWorkingDirectory)/jmeter_results.jtl</stringProp>
           </ResultCollector>
           <hashTree/>
           <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
