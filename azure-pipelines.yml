@@ -99,7 +99,7 @@ stages:
           Invoke-WebRequest -Uri $jmeterZipUrl -OutFile $jmeterZipPath
           Expand-Archive -Path $jmeterZipPath -DestinationPath $jmeterExtractPath -Force
 
-    - script: 'jmeter -n -t $(workingDirectory)/TestPost.jmx -l $(System.DefaultWorkingDirectory)/jmeter_results.jtl'
+    - script: 'jmeter -n -t $(workingDirectory)/FiDelTest.jmx -l $(System.DefaultWorkingDirectory)/jmeter_results.jtl'
       displayName: 'Run JMeter Test'
 
     - task: PublishTestResults@2
