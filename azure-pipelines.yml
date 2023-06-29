@@ -104,7 +104,7 @@ stages:
       displayName: 'Run JMeter Test'
       
     - script: |
-        cat $(System.DefaultWorkingDirectory)/jmeter_summary.txt
+        tail -1 $(System.DefaultWorkingDirectory)/jmeter_summary.txt
       displayName: 'Explore results'
       
     # - task: PublishTestResults@2
