@@ -102,7 +102,11 @@ stages:
     - script: |
         $(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter -n -t $(System.DefaultWorkingDirectory)/*.jmx -l $(System.DefaultWorkingDirectory)/jmeter_results.jtl -j $(System.DefaultWorkingDirectory)/jmeter_summary.txt
       displayName: 'Run JMeter Test'
-
+      
+    - script: |
+        cat $(System.DefaultWorkingDirectory)/jmeter_summary.txt
+      displayName: 'Explore results'
+      
     # - task: PublishTestResults@2
     #   displayName: 'Publish JMeter Test Results'
     #   inputs:
