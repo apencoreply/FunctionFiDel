@@ -155,7 +155,14 @@ stages:
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
         artifact: 'JTLResultstxt'
+    
+    - script: |
+        dir $(System.DefaultWorkingDirectory)
+      displayName: 'List Contents of Default Working Directory'
 
+    - script: |
+        dir $(Pipeline.Workspace)
+      displayName: 'List Contents of Pipeline Workspace Directory'
     - task: PowerShell@2
       displayName: 'Call ChatGPT API'
       inputs:
