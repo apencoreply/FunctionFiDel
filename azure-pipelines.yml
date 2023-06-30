@@ -192,12 +192,22 @@ stages:
           # Display the generated text
           Write-Host $generatedText
 
-    - task: SendEmail@1
-      displayName: 'Send Email Notification'
+    - task: PowerShell@2
+      displayName: 'Send Telegram Notification'
       inputs:
-        To: 'alessandro.penco11@gmail.com'
-        From: 'a.penco@reply.it'
-        Subject: 'Pipeline Completion Notification'
-        Body: |
+        targetType: 'inline'
+        script: |
+          $telegramBotToken = '6096186625:AAHcTptWfiK5CIAmSEcmjEtpfJA1oiKGR_Q'
+          $chatId = '549538016'
+          $message = @"
           The pipeline has completed successfully.
           Generated Text: $generatedText
+          "@
+
+          $uri = "https://api.telegram.org/bot$telegramBotToken/sendMessage"
+          $body = @{
+              chat_id = $chatId
+              text = $message
+          } | ConvertTo-Json
+
+          Invoke-RestMethod -Uri $uri -Method Post -Body $body -ContentType 'application/json'
