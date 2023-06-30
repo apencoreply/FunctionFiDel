@@ -187,7 +187,7 @@ stages:
           $response = Invoke-RestMethod -Uri $apiUrl -Headers $headers -Method Post -Body $payloadJson
           # Process the API response as needed
           # For example, extract and utilize the generated text
-          $generatedText = $response.choices[0].text
+          $generatedText = $response.choices[0]
 
           # Display the generated text
           Write-Host $generatedText
