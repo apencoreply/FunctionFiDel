@@ -103,14 +103,79 @@ stages:
         $(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter -n -t $(System.DefaultWorkingDirectory)/*.jmx -l $(System.DefaultWorkingDirectory)/test_summary.jtl
       displayName: 'Run JMeter Test'
       
-      # tail -1 $(System.DefaultWorkingDirectory)/jmeter_summary.txt        -Jthreads=100
+      # -Jthreads=100
     - script: |
         cat $(System.DefaultWorkingDirectory)/test_summary.jtl
       displayName: 'Explore results'
-      
-    # - task: PublishTestResults@2
-    #   displayName: 'Publish JMeter Test Results'
-    #   inputs:
-    #     testResultsFormat: 'JUnit'
-    #     testResultsFiles: '$(System.DefaultWorkingDirectory)/jmeter_results.jtl'
-    #     searchFolder: '$(System.DefaultWorkingDirectory)'
+
+- stage: Chat
+  displayName: ChatGPT stage
+  dependsOn: Test
+  condition: succeeded()
+
+  jobs:
+  - job: Chat
+    displayName: ChatGPT
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: PowerShell@2
+      displayName: 'Prepare JTL Results and Function Code'
+      inputs:
+        targetType: 'inline'
+        script: |
+          cat $(System.DefaultWorkingDirectory)/test_summary.jtl > $(System.DefaultWorkingDirectory)/jtl_results.txt
+          echo "Function Code:"
+          cat $(System.DefaultWorkingDirectory)/*.cs > $(System.DefaultWorkingDirectory)/function_code.txt
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/jtl_results.txt'
+        artifact: 'JTLResults'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
+        artifact: 'FunctionCode'
+
+    - task: PowerShell@2
+      displayName: 'Call ChatGPT API'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $jtlResultsFile = "$(Pipeline.Workspace)/JTLResults/jtl_results.txt"
+          $functionCodeFile = "$(Pipeline.Workspace)/FunctionCode/function_code.txt"
+          $apiKey = "4c7be06a162641039767063e4830a371"
+          $apiUrl = "https://apchatgpt.openai.azure.com/openai/deployments/gpt-chat/chat/completions?api-version=2023-03-15-preview"
+
+          # Read JTL results
+          $jtlResults = Get-Content -Path $jtlResultsFile
+
+          # Read function code
+          $functionCode = Get-Content -Path $functionCodeFile
+
+          # Prepare payload for API request
+           $payload = @{
+              messages = @(
+                @{ role = 'system'; content = 'You are a system that analyzes source code and JMeter results to assist any type of developer in enhancing and improving performance in the code.' },
+                @{ role = 'user'; content = $jtlResults },
+                @{ role = 'user'; content = $functionCode }
+              )
+              temperature = 0.7
+              max_tokens = 100
+          }
+          $payloadJson = $payload | ConvertTo-Json
+
+          # Make API request
+          $headers = @{
+              "Content-Type" = "application/json"
+              "Authorization" = "Bearer $apiKey"
+          }
+          $response = Invoke-RestMethod -Uri $apiUrl -Headers $headers -Method Post -Body $payloadJson
+
+          # Process the API response as needed
+          # (e.g., extract and utilize the generated text)
+
+          # Example: Print the API response
+          Write-Host $response
