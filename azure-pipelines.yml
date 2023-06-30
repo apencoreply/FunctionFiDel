@@ -118,8 +118,12 @@ stages:
     displayName: ChatGPT
     pool:
       vmImage: $(vmImageName)
-
+    
     steps:
+    - script: |
+        dir $(System.DefaultWorkingDirectory)
+      displayName: 'List Contents of Default Working Directory'
+      
     - task: PowerShell@2
       displayName: 'Prepare JTL Results and Function Code'
       inputs:
