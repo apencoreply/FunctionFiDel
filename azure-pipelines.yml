@@ -125,10 +125,6 @@ stages:
       vmImage: $(vmImageName)
     
     steps:
-    - script: |
-        dir $(System.DefaultWorkingDirectory)
-      displayName: 'List Contents of Default Working Directory'
-
     - task: DownloadPipelineArtifact@2
       displayName: 'Download JTL Results Artifact'
       inputs:
@@ -155,21 +151,14 @@ stages:
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
         artifact: 'JTLResultstxt'
-    
-    - script: |
-        dir $(System.DefaultWorkingDirectory)
-      displayName: 'List Contents of Default Working Directory'
 
-    - script: |
-        dir $(Pipeline.Workspace)
-      displayName: 'List Contents of Pipeline Workspace Directory'
     - task: PowerShell@2
       displayName: 'Call ChatGPT API'
       inputs:
         targetType: 'inline'
         script: |
-          $jtlResultsFile = "$(Pipeline.Workspace)/jtl_results.txt"
-          $functionCodeFile = "$(Pipeline.Workspace)/function_code.txt"
+          $jtlResultsFile = "$(System.DefaultWorkingDirectory)/jtl_results.txt"
+          $functionCodeFile = "$(System.DefaultWorkingDirectory)/function_code.txt"
           $apiKey = "4c7be06a162641039767063e4830a371"
           $apiUrl = "https://apchatgpt.openai.azure.com/openai/deployments/gpt-chat/chat/completions?api-version=2023-03-15-preview"
 
