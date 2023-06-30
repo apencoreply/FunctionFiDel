@@ -150,15 +150,19 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
-        artifact: 'FunctionCode'
+        artifact: 'FunctionCodetxt'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
+        artifact: 'JTLResultstxt'
 
     - task: PowerShell@2
       displayName: 'Call ChatGPT API'
       inputs:
         targetType: 'inline'
         script: |
-          $jtlResultsFile = "$(Pipeline.Workspace)/JTLResults/jtl_results.txt"
-          $functionCodeFile = "$(Pipeline.Workspace)/FunctionCode/function_code.txt"
+          $jtlResultsFile = "$(Pipeline.Workspace)/jtl_results.txt"
+          $functionCodeFile = "$(Pipeline.Workspace)/function_code.txt"
           $apiKey = "4c7be06a162641039767063e4830a371"
           $apiUrl = "https://apchatgpt.openai.azure.com/openai/deployments/gpt-chat/chat/completions?api-version=2023-03-15-preview"
 
