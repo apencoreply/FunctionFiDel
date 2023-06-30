@@ -50,6 +50,11 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/*.cs'
+        artifact: 'FunctionCode'
+
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
@@ -108,6 +113,11 @@ stages:
         cat $(System.DefaultWorkingDirectory)/test_summary.jtl
       displayName: 'Explore results'
 
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/test_summary.jtl'
+        artifact: 'JTLResults'
+
 - stage: Chat
   displayName: ChatGPT stage
   dependsOn: Test
@@ -123,6 +133,18 @@ stages:
     - script: |
         dir $(System.DefaultWorkingDirectory)
       displayName: 'List Contents of Default Working Directory'
+
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download JTL Results Artifact'
+      inputs:
+        artifactName: 'JTLResults'
+        targetPath: '$(System.DefaultWorkingDirectory)'
+
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download Function Code Artifact'
+      inputs:
+        artifactName: 'FunctionCode'
+        targetPath: '$(System.DefaultWorkingDirectory)'
       
     - task: PowerShell@2
       displayName: 'Prepare JTL Results and Function Code'
