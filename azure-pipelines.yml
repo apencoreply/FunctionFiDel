@@ -134,12 +134,6 @@ stages:
       inputs:
         artifactName: 'JTLResults'
         targetPath: '$(System.DefaultWorkingDirectory)'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download Function Code Artifact'
-      inputs:
-        artifactName: 'FunctionCode'
-        targetPath: '$(System.DefaultWorkingDirectory)'
       
     - task: PowerShell@2
       displayName: 'Prepare JTL Results and Function Code'
