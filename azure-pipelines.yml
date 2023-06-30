@@ -160,7 +160,7 @@ stages:
           $jtlResultsFile = "$(System.DefaultWorkingDirectory)/jtl_results.txt"
           $functionCodeFile = "$(System.DefaultWorkingDirectory)/function_code.txt"
           $apiKey = "4c7be06a162641039767063e4830a371"
-          $apiUrl = "apchatgpt.openai.azure.com/openai/deployments/gpt-chat/chat/completions?api-version=2023-03-15-preview"
+          $apiUrl = "https://apchatgpt.openai.azure.com/openai/deployments/gpt-chat/chat/completions?api-version=2023-03-15-preview"
 
           # Read JTL results
           $jtlResults = Get-Content -Path $jtlResultsFile
