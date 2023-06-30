@@ -201,7 +201,7 @@ stages:
           $chatId = '549538016'
           $message = @"
           The pipeline has completed successfully.
-          Generated Text: $generatedText
+          Generated Text: $(generatedText)
           "@
 
           $uri = "https://api.telegram.org/bot$telegramBotToken/sendMessage"
