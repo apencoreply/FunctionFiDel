@@ -192,6 +192,8 @@ stages:
           # Display the generated text
           Write-Host $generatedText
 
+          $generatedText | Out-File "$(System.DefaultWorkingDirectory)/generatedText.txt" -Encoding utf8
+
     - task: PowerShell@2
       displayName: 'Send Telegram Notification'
       inputs:
@@ -199,9 +201,13 @@ stages:
         script: |
           $telegramBotToken = '6096186625:AAHcTptWfiK5CIAmSEcmjEtpfJA1oiKGR_Q'
           $chatId = '549538016'
+          $generatedText = Get-Content -Path "$(System.DefaultWorkingDirectory)/generatedText.txt"
           $message = @"
           The pipeline has completed successfully.
-          Generated Text: $(generatedText)
+          Generated Text:
+          ---
+          $generatedText
+          ---
           "@
 
           $uri = "https://api.telegram.org/bot$telegramBotToken/sendMessage"
