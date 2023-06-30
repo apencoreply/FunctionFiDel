@@ -50,11 +50,6 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/*.cs'
-        artifact: 'FunctionCode'
-
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
@@ -151,9 +146,10 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          cat $(System.DefaultWorkingDirectory)/test_summary.jtl > $(System.DefaultWorkingDirectory)/jtl_results.txt
           echo "Function Code:"
           cat $(System.DefaultWorkingDirectory)/*.cs > $(System.DefaultWorkingDirectory)/function_code.txt
+          echo "JTL Results:"
+          cat $(System.DefaultWorkingDirectory)/test_summary.jtl > $(System.DefaultWorkingDirectory)/jtl_results.txt
 
     - task: PublishPipelineArtifact@1
       inputs:
