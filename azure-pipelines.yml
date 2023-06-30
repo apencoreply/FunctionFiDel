@@ -191,3 +191,13 @@ stages:
 
           # Display the generated text
           Write-Host $generatedText
+
+    - task: SendEmail@1
+      displayName: 'Send Email Notification'
+      inputs:
+        To: 'alessandro.penco11@gmail.com'
+        From: 'a.penco@reply.it'
+        Subject: 'Pipeline Completion Notification'
+        Body: |
+          The pipeline has completed successfully.
+          Generated Text: $generatedText
