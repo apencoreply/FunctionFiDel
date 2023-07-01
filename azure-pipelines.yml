@@ -143,14 +143,14 @@ stages:
           cat $(System.DefaultWorkingDirectory)/test_summary.jtl
           cat $(System.DefaultWorkingDirectory)/test_summary.jtl > $(System.DefaultWorkingDirectory)/jtl_results.txt
 
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
-        artifact: 'FunctionCodetxt'
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
-        artifact: 'JTLResultstxt'
+    # - task: PublishPipelineArtifact@1
+    #   inputs:
+    #     targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
+    #     artifact: 'FunctionCodetxt'
+    # - task: PublishPipelineArtifact@1
+    #   inputs:
+    #     targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
+    #     artifact: 'JTLResultstxt'
 
     - task: PowerShell@2
       displayName: 'List contents of DefaultWorkingDirectory'
@@ -172,11 +172,9 @@ stages:
 
           # Read JTL results
           $jtlResults = Get-Content -Path $jtlResultsFile -Raw
-          cat $jtlResults
 
           # Read function code
           $functionCode = Get-Content -Path $functionCodeFile -Raw
-          cat $functionCode
 
           # Prepare payload for API request
            $payload = @{
