@@ -171,11 +171,11 @@ stages:
           $apiUrl = "https://apchatgpt.openai.azure.com/openai/deployments/gpt-chat/chat/completions?api-version=2023-03-15-preview"
 
           # Read JTL results
-          $jtlResults = Get-Content -Path $jtlResultsFile
+          $jtlResults = Get-Content -Path $jtlResultsFile -Raw
           cat $jtlResults
 
           # Read function code
-          $functionCode = Get-Content -Path $functionCodeFile
+          $functionCode = Get-Content -Path $functionCodeFile -Raw
           cat $functionCode
 
           # Prepare payload for API request
