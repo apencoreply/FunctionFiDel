@@ -153,6 +153,14 @@ stages:
         artifact: 'JTLResultstxt'
 
     - task: PowerShell@2
+      displayName: 'List contents of DefaultWorkingDirectory'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $directory = "$(System.DefaultWorkingDirectory)"
+          Get-ChildItem -Path $directory
+
+    - task: PowerShell@2
       displayName: 'Call ChatGPT API'
       inputs:
         targetType: 'inline'
