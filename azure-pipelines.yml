@@ -143,15 +143,6 @@ stages:
           cat $(System.DefaultWorkingDirectory)/test_summary.jtl
           cat $(System.DefaultWorkingDirectory)/test_summary.jtl > $(System.DefaultWorkingDirectory)/jtl_results.txt
 
-    # - task: PublishPipelineArtifact@1
-    #   inputs:
-    #     targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
-    #     artifact: 'FunctionCodetxt'
-    # - task: PublishPipelineArtifact@1
-    #   inputs:
-    #     targetPath: '$(System.DefaultWorkingDirectory)/function_code.txt'
-    #     artifact: 'JTLResultstxt'
-
     - task: PowerShell@2
       displayName: 'List contents of DefaultWorkingDirectory'
       inputs:
@@ -180,7 +171,7 @@ stages:
            $payload = @{
               messages = @(
                 @{ role = 'system'; content = 'You are a system that analyzes source code and JMeter results to assist any type of developer in enhancing and improving performance in the code.' },
-                @{ role = 'user'; content = "JTL Results:\n---\n$jtlResults\n---\nFunction Code:\n---\n$functionCode\n---"}
+                @{ role = 'user'; content = "Provide me exmaple on how could imporve the Function code, dased on Function code and JTL Results:\n----\nJTL Results:\n---\n$jtlResults\n---\nFunction Code:\n---\n$functionCode\n---\n----"}
               )
               temperature = 0.7
               max_tokens = 1000
