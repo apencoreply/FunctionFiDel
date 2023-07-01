@@ -165,16 +165,18 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          $jtlResultsFile = cat $(System.DefaultWorkingDirectory)/jtl_results.txt
-          $functionCodeFile = cat $(System.DefaultWorkingDirectory)/function_code.txt
+          $jtlResultsFile = "$(System.DefaultWorkingDirectory)/jtl_results.txt"
+          $functionCodeFile = "$(System.DefaultWorkingDirectory)/function_code.txt"
           $apiKey = "4c7be06a162641039767063e4830a371"
           $apiUrl = "https://apchatgpt.openai.azure.com/openai/deployments/gpt-chat/chat/completions?api-version=2023-03-15-preview"
 
           # Read JTL results
           $jtlResults = Get-Content -Path $jtlResultsFile
+          cat $jtlResults
 
           # Read function code
           $functionCode = Get-Content -Path $functionCodeFile
+          cat $functionCode
 
           # Prepare payload for API request
            $payload = @{
