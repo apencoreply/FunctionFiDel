@@ -69,7 +69,7 @@ stages:
       displayName: 'Use .NET SDK 6.x'
 
     - script: |
-        dotnet tool install --global AzureFunctions.Tools
+        dotnet tool install --global AzureFunctions
         func --version
         func start
       displayName: 'Run Azure Functions Locally'
