@@ -50,9 +50,65 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
+- stage: Test
+  displayName: Test stage
+  dependsOn: Build
+  condition: succeeded()
+
+  jobs:
+  - job: Test
+    displayName: Test
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: PowerShell@2
+      displayName: 'Run Local Function Test'
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Add commands to run tests locally on your Azure Function
+          dotnet test $(System.DefaultWorkingDirectory) --configuration Release
+
+    - task: PowerShell@2
+      displayName: 'Run cURL Test'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $functionAppName = "$(functionAppName)"
+          $functionName = "FiDelApp"
+          $url = "http://localhost:7071/api/$functionName"
+          
+          $requestBody = @{
+              id = "0001"
+              categoryId = "3E4CEACD-D007-46EB-82D7-31F6141752B2"
+              categoryName = "Components, Road Frames"
+              sku = "FR-R38R-48"
+              name = "LL Road Frame - Red, 48"
+              description = "The product called 'LL Road Frame - Red, 48'"
+              price = 337.22
+              tags = @(
+                  @{
+                      id = "033D3826-2851-4B97-9464-59D3675175D4"
+                      name = "Tag-108"
+                  },
+                  @{
+                      id = "A2176C7A-4E0D-4283-AFAA-319A77E9C122"
+                      name = "Tag-19"
+                  }
+              )
+          }
+          $requestBodyJson = $requestBody | ConvertTo-Json
+          $response = Invoke-RestMethod -Uri $url -Method Post -Body $requestBodyJson -ContentType "application/json"
+
+          Write-Host "Response Body: $($response | ConvertTo-Json)"
+
+    # Add additional tasks for your specific testing requirements
+    # You can include assertions or validations based on the response received from the Azure Function
+
 - stage: Deploy
   displayName: Deploy stage
-  dependsOn: Build
+  dependsOn: Test
   condition: succeeded()
 
   jobs:
@@ -75,8 +131,8 @@ stages:
               appName: $(functionAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
 
-- stage: Test
-  displayName: Test stage
+- stage: JMeterTest
+  displayName: JMeter Test stage
   dependsOn: Deploy
   condition: succeeded()
 
@@ -113,9 +169,9 @@ stages:
         targetPath: '$(System.DefaultWorkingDirectory)/test_summary.jtl'
         artifact: 'JTLResults'
 
-- stage: Chat
+- stage: ChatGPT
   displayName: ChatGPT stage
-  dependsOn: Test
+  dependsOn: JMeterTest
   condition: succeeded()
 
   jobs:
