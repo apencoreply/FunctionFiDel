@@ -62,14 +62,17 @@ stages:
       vmImage: $(vmImageName)
 
     steps:
-    - task: PowerShell@2
-      displayName: 'Run Local Function Test'
+    - task: UseDotNet@2
       inputs:
-        targetType: 'inline'
-        script: |
-          dotnet test $(System.DefaultWorkingDirectory) --configuration Release
+        packageType: 'sdk'
+        version: '6.x'
+      displayName: 'Use .NET SDK 6.x'
 
-        #Add commands to run tests locally on your Azure Function
+    - script: |
+        dotnet tool install --global AzureFunctions.Tools
+        func start
+      displayName: 'Run Azure Functions Locally'
+
     - task: PowerShell@2
       displayName: 'Run cURL Test'
       #dependsOn: 'Run Local Function Test'
