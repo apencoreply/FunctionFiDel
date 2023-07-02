@@ -70,6 +70,7 @@ stages:
 
     - script: |
         dotnet tool install --global AzureFunctions.Tools
+        func --version
         func start
       displayName: 'Run Azure Functions Locally'
 
