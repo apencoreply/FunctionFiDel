@@ -67,9 +67,9 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          # Add commands to run tests locally on your Azure Function
           dotnet test $(System.DefaultWorkingDirectory) --configuration Release
 
+        #Add commands to run tests locally on your Azure Function
     - task: PowerShell@2
       displayName: 'Run cURL Test'
       #dependsOn: 'Run Local Function Test'
