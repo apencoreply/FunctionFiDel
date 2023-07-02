@@ -60,53 +60,80 @@ stages:
     displayName: Test
     pool:
       vmImage: $(vmImageName)
-
     steps:
-    - task: UseDotNet@2
+    - task: FuncToolsInstaller@0
       inputs:
-        packageType: 'sdk'
-        version: '6.x'
-      displayName: 'Use .NET SDK 6.x'
-
-        #dotnet tool install --global AzureFunctions
-    - script: |
-        npm i -g azure-functions-core-tools@4 --unsafe-perm true
-        func --version
-        func start
-      displayName: 'Run Azure Functions Locally'
-
-    - task: PowerShell@2
-      displayName: 'Run cURL Test'
-      #dependsOn: 'Run Local Function Test'
+        version: 'latest'
+    - task: AzureFunction@1
       inputs:
-        targetType: 'inline'
-        script: |
-          $functionAppName = "$(functionAppName)"
-          $url = "http://localhost:7071/api/$functionAppName"
+        function: 'http://localhost:7071/api/$functionAppName'
+        method: 'POST'
+        body: |
+          {
+                        id = "0001"
+                        categoryId = "3E4CEACD-D007-46EB-82D7-31F6141752B2"
+                        categoryName = "Components, Road Frames"
+                        sku = "FR-R38R-48"
+                        name = "LL Road Frame - Red, 48"
+                        description = "The product called 'LL Road Frame - Red, 48'"
+                        price = 337.22
+                        tags = @(
+                            @{
+                                id = "033D3826-2851-4B97-9464-59D3675175D4"
+                                name = "Tag-108"
+                            },
+                            @{
+                                id = "A2176C7A-4E0D-4283-AFAA-319A77E9C122"
+                                name = "Tag-19"
+                            }
+                        )
+                    }
+        waitForCompletion: 'false'
+    # - task: UseDotNet@2
+    #   inputs:
+    #     packageType: 'sdk'
+    #     version: '6.x'
+    #   displayName: 'Use .NET SDK 6.x'
+
+    #     #dotnet tool install --global AzureFunctions
+    # - script: |
+    #     npm i -g azure-functions-core-tools@4 --unsafe-perm true
+    #     func --version
+    #     func start
+    #   displayName: 'Run Azure Functions Locally'
+
+    # - task: PowerShell@2
+    #   displayName: 'Run cURL Test'
+    #   #dependsOn: 'Run Local Function Test'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       $functionAppName = "$(functionAppName)"
+    #       $url = "http://localhost:7071/api/$functionAppName"
           
-          $requestBody = @{
-              id = "0001"
-              categoryId = "3E4CEACD-D007-46EB-82D7-31F6141752B2"
-              categoryName = "Components, Road Frames"
-              sku = "FR-R38R-48"
-              name = "LL Road Frame - Red, 48"
-              description = "The product called 'LL Road Frame - Red, 48'"
-              price = 337.22
-              tags = @(
-                  @{
-                      id = "033D3826-2851-4B97-9464-59D3675175D4"
-                      name = "Tag-108"
-                  },
-                  @{
-                      id = "A2176C7A-4E0D-4283-AFAA-319A77E9C122"
-                      name = "Tag-19"
-                  }
-              )
-          }
-          $requestBodyJson = $requestBody | ConvertTo-Json
-          $response = Invoke-RestMethod -Uri $url -Method Post -Body $requestBodyJson -ContentType "application/json"
+    #       $requestBody = @{
+    #           id = "0001"
+    #           categoryId = "3E4CEACD-D007-46EB-82D7-31F6141752B2"
+    #           categoryName = "Components, Road Frames"
+    #           sku = "FR-R38R-48"
+    #           name = "LL Road Frame - Red, 48"
+    #           description = "The product called 'LL Road Frame - Red, 48'"
+    #           price = 337.22
+    #           tags = @(
+    #               @{
+    #                   id = "033D3826-2851-4B97-9464-59D3675175D4"
+    #                   name = "Tag-108"
+    #               },
+    #               @{
+    #                   id = "A2176C7A-4E0D-4283-AFAA-319A77E9C122"
+    #                   name = "Tag-19"
+    #               }
+    #           )
+    #       }
+    #       $requestBodyJson = $requestBody | ConvertTo-Json
+    #       $response = Invoke-RestMethod -Uri $url -Method Post -Body $requestBodyJson -ContentType "application/json"
 
-          Write-Host "Response Body: $($response | ConvertTo-Json)"
+    #       Write-Host "Response Body: $($response | ConvertTo-Json)"
 
     # Add additional tasks for your specific testing requirements
     # You can include assertions or validations based on the response received from the Azure Function
