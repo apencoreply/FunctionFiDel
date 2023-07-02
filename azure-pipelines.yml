@@ -68,8 +68,9 @@ stages:
         version: '6.x'
       displayName: 'Use .NET SDK 6.x'
 
+        #dotnet tool install --global AzureFunctions
     - script: |
-        dotnet tool install --global AzureFunctions
+        npm i -g azure-functions-core-tools@4 --unsafe-perm true
         func --version
         func start
       displayName: 'Run Azure Functions Locally'
