@@ -72,12 +72,12 @@ stages:
 
     - task: PowerShell@2
       displayName: 'Run cURL Test'
+      #dependsOn: 'Run Local Function Test'
       inputs:
         targetType: 'inline'
         script: |
           $functionAppName = "$(functionAppName)"
-          $functionName = "FiDelApp"
-          $url = "http://localhost:7071/api/$functionName"
+          $url = "http://localhost:7071/api/$functionAppName"
           
           $requestBody = @{
               id = "0001"
