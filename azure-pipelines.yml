@@ -66,12 +66,14 @@ stages:
         packageType: 'sdk'
         version: '6.x'
       displayName: 'Use .NET SDK 6.x'
-
-    - script: |
-        choco install azure-functions-core-tools
-        func --version
-        Start-Process func --workingDirectory $(System.DefaultWorkingDirectory) --noNewWindow --wait host start
+    - task: PowerShell@2
       displayName: 'Run Azure Functions Locally'
+      inputs:
+        targetType: 'inline'
+        script: |
+          choco install azure-functions-core-tools
+          func --version
+          Start-Process func --workingDirectory $(System.DefaultWorkingDirectory) --noNewWindow --wait host start
 
     - task: PowerShell@2
       displayName: 'Run cURL Test'
