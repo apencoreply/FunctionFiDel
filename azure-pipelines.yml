@@ -70,8 +70,18 @@ stages:
     - script: |
         choco install azure-functions-core-tools
         func --version
-        func host start &
-        sleep 15
+      displayName: 'Install Azure Functions Core Tools'
+
+    - script: |
+        $functionAppName = "FiDelApp"
+        $functionAppPath = "$(System.DefaultWorkingDirectory)"
+
+        Write-Host "Starting Azure Function host in the background..."
+        Start-Job -Name "FunctionsHost" -ScriptBlock {
+          param($functionAppPath)
+          Set-Location $functionAppPath
+          Start-Process -FilePath 'func' -ArgumentList 'host', 'start' -NoNewWindow
+        } -ArgumentList $functionAppPath
       displayName: 'Run Azure Function Locally'
 
     - task: PowerShell@2
