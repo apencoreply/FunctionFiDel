@@ -98,8 +98,12 @@ stages:
                   }
               )
           }
+          $headers = @{
+            "Content-Type" = "application/json"
+          }
+
           $requestBodyJson = $requestBody | ConvertTo-Json
-          $response = Invoke-RestMethod -Uri $url -Method Post -Body $requestBodyJson -ContentType "application/json"
+          $response = Invoke-RestMethod -Uri $url -Method Post -Body $requestBodyJson -Headers $headers
 
           Write-Host "Response Body: $($response | ConvertTo-Json)"
 
