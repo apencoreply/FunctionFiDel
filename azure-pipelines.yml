@@ -69,7 +69,7 @@ stages:
 
         #dotnet tool install --global AzureFunctions
     - script: |
-        npm i -g azure-functions-core-tools@4 --unsafe-perm true
+        npm i -g azure-functions-core-tools@4
         func --version
         func start
       displayName: 'Run Azure Functions Locally'
