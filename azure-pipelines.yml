@@ -91,39 +91,36 @@ stages:
         sleep 15
       displayName: 'Run Azure Function Locally'
 
-    - task: PowerShell@2
-      displayName: 'Run cURL Test'
-      inputs:
-        targetType: 'inline'
-        script: |
-          $url = "http://localhost:7071/api/FiDelApp"
-          $requestBody = @{
-              id = "0001"
-              categoryId = "3E4CEACD-D007-46EB-82D7-31F6141752B2"
-              categoryName = "Components, Road Frames"
-              sku = "FR-R38R-48"
-              name = "LL Road Frame - Red, 48"
-              description = "The product called 'LL Road Frame - Red, 48'"
-              price = 337.22
-              tags = @(
-                  @{
-                      id = "033D3826-2851-4B97-9464-59D3675175D4"
-                      name = "Tag-108"
-                  },
-                  @{
-                      id = "A2176C7A-4E0D-4283-AFAA-319A77E9C122"
-                      name = "Tag-19"
-                  }
-              )
-          }
-          $headers = @{
-            "Content-Type" = "application/json"
-          }
+    - script: |
+        $url = "http://localhost:7071/api/FiDelApp"
+        $requestBody = @{
+            id = "0001"
+            categoryId = "3E4CEACD-D007-46EB-82D7-31F6141752B2"
+            categoryName = "Components, Road Frames"
+            sku = "FR-R38R-48"
+            name = "LL Road Frame - Red, 48"
+            description = "The product called 'LL Road Frame - Red, 48'"
+            price = 337.22
+            tags = @(
+                @{
+                    id = "033D3826-2851-4B97-9464-59D3675175D4"
+                    name = "Tag-108"
+                },
+                @{
+                    id = "A2176C7A-4E0D-4283-AFAA-319A77E9C122"
+                    name = "Tag-19"
+                }
+            )
+        }
+        $headers = @{
+          "Content-Type" = "application/json"
+        }
 
-          $requestBodyJson = $requestBody | ConvertTo-Json
-          $response = Invoke-RestMethod -Uri $url -Method Post -Body $requestBodyJson -Headers $headers
+        $requestBodyJson = $requestBody | ConvertTo-Json
+        $response = Invoke-RestMethod -Uri $url -Method Post -Body $requestBodyJson -Headers $headers
 
-          Write-Host "Response Body: $($response | ConvertTo-Json)"
+        Write-Host "Response Body: $($response | ConvertTo-Json)"
+      displayName: 'Test Azure Function Locally'
 
     # Add additional tasks for your specific testing requirements
     # You can include assertions or validations based on the response received from the Azure Function
