@@ -71,18 +71,21 @@ stages:
         choco install azure-functions-core-tools
         func --version
       displayName: 'Install Azure Functions Core Tools'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'run'
+        projects: '$(System.DefaultWorkingDirectory)'
+    # - script: |
+    #     $functionAppName = "FiDelApp"
+    #     $functionAppPath = "$(System.DefaultWorkingDirectory)"
 
-    - script: |
-        $functionAppName = "FiDelApp"
-        $functionAppPath = "$(System.DefaultWorkingDirectory)"
-
-        Write-Host "Starting Azure Function host in the background..."
-        Start-Job -Name "FunctionsHost" -ScriptBlock {
-          param($functionAppPath)
-          Set-Location $functionAppPath
-          Start-Process -FilePath 'func' -ArgumentList 'host', 'start' -NoNewWindow
-        } -ArgumentList $functionAppPath
-      displayName: 'Run Azure Function Locally'
+    #     Write-Host "Starting Azure Function host in the background..."
+    #     Start-Job -Name "FunctionsHost" -ScriptBlock {
+    #       param($functionAppPath)
+    #       Set-Location $functionAppPath
+    #       Start-Process -FilePath 'func' -ArgumentList 'host', 'start' -NoNewWindow
+    #     } -ArgumentList $functionAppPath
+    #   displayName: 'Run Azure Function Locally'
 
     - task: PowerShell@2
       displayName: 'Run cURL Test'
