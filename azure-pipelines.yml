@@ -66,6 +66,7 @@ stages:
         packageType: 'sdk'
         version: '6.x'
       displayName: 'Use .NET SDK 6.x'
+          # Start-Job -Name "FunctionsHost" -ScriptBlock { func host start }
     - task: PowerShell@2
       displayName: 'Run Azure Functions Locally'
       inputs:
@@ -73,7 +74,8 @@ stages:
         script: |
           choco install azure-functions-core-tools
           func --version
-          Start-Job -Name "FunctionsHost" -ScriptBlock { func host start }
+          Start-Process func -ArgumentList 'start' -NoNewWindow -PassThru | Out-Null
+          Start-Sleep -Seconds 15
 
     - task: PowerShell@2
       displayName: 'Run cURL Test'
