@@ -69,21 +69,21 @@ stages:
 
     - script: |
         choco install azure-functions-core-tools -y
-        dotnet tool install --global AzureFunctions.Tools --version 7.x
-        dotnet tool install --global dotnet-ef --version 6.x
-        dotnet tool install --global dotnet-script --version 1.x
-        dotnet tool install --global Microsoft.AspNetCore.WebSockets --version 2.x
-        dotnet tool install --global AzureFunctions.TemplateBinder --version 1.x
-        dotnet tool install --global Microsoft.Azure.WebJobs.Script.ExtensionsMetadataGenerator --version 1.x
-        dotnet tool install --global Microsoft.Azure.WebJobs.Extensions.Storage --version 4.x
-        dotnet tool install --global Microsoft.Azure.Functions.Worker.Sdk --version 1.x
-        dotnet tool install --global Microsoft.Azure.Functions.Worker --version 1.x
-        dotnet tool install --global Microsoft.Azure.Functions.Worker.Http --version 3.x
-        dotnet tool install --global Microsoft.Azure.Functions.Worker.Extensions.Http --version 3.x
-        dotnet tool install --global Microsoft.Azure.Functions.Worker.Extensions.Storage --version 4.x
-        dotnet tool install --global Microsoft.Azure.Functions.Worker.Sdk --version 1.x
-        dotnet tool install --global Microsoft.Azure.Functions.Extensions --version 1.x
-        dotnet tool install --global Microsoft.Azure.Functions.Extensions.DependencyInjection --version 1.x
+        dotnet tool install --global AzureFunctions.Tools --version 7.4.1
+        dotnet tool install --global dotnet-ef --version 6.4.4
+        dotnet tool install --global dotnet-script --version 1.1.1
+        dotnet tool install --global Microsoft.AspNetCore.WebSockets --version 2.2.0
+        dotnet tool install --global AzureFunctions.TemplateBinder --version 1.4.0
+        dotnet tool install --global Microsoft.Azure.WebJobs.Script.ExtensionsMetadataGenerator --version 1.2.0
+        dotnet tool install --global Microsoft.Azure.WebJobs.Extensions.Storage --version 4.0.4
+        dotnet tool install --global Microsoft.Azure.Functions.Worker.Sdk --version 1.5.1
+        dotnet tool install --global Microsoft.Azure.Functions.Worker --version 1.5.1
+        dotnet tool install --global Microsoft.Azure.Functions.Worker.Http --version 3.0.13
+        dotnet tool install --global Microsoft.Azure.Functions.Worker.Extensions.Http --version 3.0.13
+        dotnet tool install --global Microsoft.Azure.Functions.Worker.Extensions.Storage --version 4.0.4
+        dotnet tool install --global Microsoft.Azure.Functions.Worker.Sdk --version 1.5.1
+        dotnet tool install --global Microsoft.Azure.Functions.Extensions --version 1.1.0
+        dotnet tool install --global Microsoft.Azure.Functions.Extensions.DependencyInjection --version 1.1.0
 
         dotnet restore
         dotnet build
