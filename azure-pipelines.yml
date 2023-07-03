@@ -78,7 +78,9 @@ stages:
           choco install azure-functions-core-tools -y
           func --version
           Start-Process -FilePath 'func' -ArgumentList 'host', 'start' -NoNewWindow
+          func --version
           Start-Sleep -Seconds 15
+          func --version
       displayName: 'Run Azure Function Locally'
 
     - task: PowerShell@2
