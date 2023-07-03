@@ -73,7 +73,7 @@ stages:
         script: |
           choco install azure-functions-core-tools
           func --version
-          Start-Process func --workingDirectory $(System.DefaultWorkingDirectory) --noNewWindow --wait host start
+          Start-Job -Name "FunctionsHost" -ScriptBlock { func host start }
 
     - task: PowerShell@2
       displayName: 'Run cURL Test'
