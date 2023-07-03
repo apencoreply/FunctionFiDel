@@ -67,17 +67,14 @@ stages:
         version: '6.x'
       displayName: 'Use .NET SDK 6.x'
 
-        #dotnet tool install --global AzureFunctions
-        # npm i -g azure-functions-core-tools@4 --unsafe-perm true
     - script: |
         choco install azure-functions-core-tools
         func --version
-        func host start --background
+        func host start --build
       displayName: 'Run Azure Functions Locally'
 
     - task: PowerShell@2
       displayName: 'Run cURL Test'
-      #dependsOn: 'Run Local Function Test'
       inputs:
         targetType: 'inline'
         script: |
