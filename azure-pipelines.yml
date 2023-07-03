@@ -70,7 +70,7 @@ stages:
     - script: |
         choco install azure-functions-core-tools
         func --version
-        func host start --build
+        start cmd /c "func host start"
       displayName: 'Run Azure Functions Locally'
 
     - task: PowerShell@2
