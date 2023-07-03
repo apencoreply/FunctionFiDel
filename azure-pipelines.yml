@@ -67,14 +67,18 @@ stages:
         version: '6.x'
       displayName: 'Use .NET SDK 6.x'
 
+            # choco install azure-functions-core-tools
+            # func --version
+            # func host start &
+            # sleep 15
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
         script: |
-            choco install azure-functions-core-tools
-            func --version
-            func host start &
-            sleep 15
+          choco install azure-functions-core-tools -y
+          func --version
+          Start-Process -FilePath 'func' -ArgumentList 'host', 'start' -NoNewWindow
+          Start-Sleep -Seconds 15
       displayName: 'Run Azure Function Locally'
 
     - task: PowerShell@2
