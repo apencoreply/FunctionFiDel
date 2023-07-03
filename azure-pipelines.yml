@@ -112,10 +112,49 @@ stages:
 
 # # #     # Add additional tasks for your specific testing requirements
 # # #     # You can include assertions or validations based on the response received from the Azure Function
+- stage: RunTests
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - job: RunTests
+    displayName: 'Run App Function Tests'
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - checkout: self
+
+    # Add steps to build your app here
+    - script: |
+        # Build your app commands here
+        # For example, if you're using .NET Core:
+        dotnet restore
+        dotnet build
+        dotnet publish --output $(build.artifactstagingdirectory)
+    
+    # Add steps to run your HTTP trigger tests here
+    - script: |
+        # Start the function app locally
+        # For example, if you're using .NET Core:
+        cd $(build.artifactstagingdirectory)
+        func start
+
+      displayName: 'Start Function App Locally'
+      env:
+        AzureWebJobsStorage: DefaultEndpointsProtocol=https;AccountName=fidelblobstorage;AccountKey=es47299oRb3AH5XCSq6QxkbppmRV7z9yej+HYy1/YWEgrTuEobsEMTamzJDMXOOgNh01sMGzgs/X+AStBdq09A==;EndpointSuffix=core.windows.net
+
+    - script: |
+        # Execute curl commands to test the HTTP trigger
+        # For example, if you have a GET endpoint named "MyHttpTrigger":
+        curl -X POST http://localhost:7071/api/FiDelApp
+
+        # Add more curl commands for other endpoints or HTTP methods as needed
+
+      displayName: 'Test HTTP Trigger with Curl'
 
 - stage: Deploy
   displayName: Deploy stage
-  dependsOn: Build
+  dependsOn: RunTests
   condition: succeeded()
 
   jobs:
