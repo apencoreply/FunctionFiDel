@@ -79,7 +79,7 @@ stages:
         targetType: 'inline'
         script: |
           $functionAppName = "$(functionAppName)"
-          $url = "http://localhost:7071/api/$functionAppName"
+          $url = "http://localhost:7071/api/$(functionAppName)"
           
           $requestBody = @{
               id = "0001"
