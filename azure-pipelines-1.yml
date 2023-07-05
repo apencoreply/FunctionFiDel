@@ -22,9 +22,10 @@ variables:
 resources:
   repositories:
     - repository: fidelapp
-      type: git
-      name: FiDelApp
-      ref: refs/tags/v1
+      type: github
+      name: apencoreply/FiDelApp
+      ref: refs/heads/master
+      endpoint: apencoreply
 
 stages:
 - template: FiDelApp/build.yml@FiDelApp
