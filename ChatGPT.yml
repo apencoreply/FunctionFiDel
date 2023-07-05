@@ -1,3 +1,5 @@
+
+stages:
 - stage: ChatGPT
   displayName: ChatGPT stage
   dependsOn: JMeterTest
