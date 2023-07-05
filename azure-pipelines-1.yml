@@ -19,16 +19,8 @@ variables:
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
 
-resources:
-  repositories:
-    - repository: fidelapp
-      type: github
-      name: apencoreply/FiDelApp
-      ref: refs/heads/master
-      endpoint: apencoreply
-
 stages:
-- template: FiDelApp/build.yml@FiDelApp
-- template: FiDelApp/deploy.yml@FiDelApp
-- template: FiDelApp/JMeter.yml@FiDelApp
-- template: FiDelApp/ChatGPT.yml@FiDelApp
+- template: build.yml
+- template: deploy.yml
+- template: JMeter.yml
+- template: ChatGPT.yml
