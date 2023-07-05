@@ -1,0 +1,33 @@
+# .NET Core Function App to Windows on Azure
+# Build a .NET Core function app and deploy it to Azure as a Windows function App.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+variables:
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: 'ed7d4ce5-655e-4eb0-819b-8774720c7d08'
+
+  # Function app name
+  functionAppName: 'FiDelApp'
+
+  # Agent VM image name
+  vmImageName: 'windows-2019'
+
+  # Working Directory
+  workingDirectory: '$(System.DefaultWorkingDirectory)/'
+
+resources:
+  repositories:
+    - repository: fidelapp
+      type: git
+      name: FiDelApp
+      ref: refs/tags/v1
+
+stages:
+- template: FiDelApp/build.yml@FiDelApp
+- template: FiDelApp/deploy.yml@FiDelApp
+- template: FiDelApp/JMeter.yml@FiDelApp
+- template: FiDelApp/ChatGPT.yml@FiDelApp
