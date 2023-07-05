@@ -1,3 +1,5 @@
+
+stages:
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
