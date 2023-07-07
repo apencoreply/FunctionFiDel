@@ -49,7 +49,6 @@ stages:
 
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
-- template: build.yml
 - template: deploy.yml
 - template: JMeter.yml
 - template: ChatGPT.yml
