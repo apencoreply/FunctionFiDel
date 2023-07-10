@@ -33,11 +33,11 @@ stages:
           $content = Get-Content -Path $filePath -Raw
 
           $newContent = $content -replace "<stringProp name=`"ThreadGroup.num_threads`">10</stringProp>", "<stringProp name=`"ThreadGroup.num_threads`">30</stringProp>"
-          $newContent = $newContent -replace "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>", "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>"
-          $newContent = $newContent -replace "<stringProp name=`"LoopController.loops`">10</stringProp>", "<stringProp name=`"LoopController.loops`">1</stringProp>"
 
           $newContent | Set-Content -Path $filePath
     
+          # $newContent = $newContent -replace "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>", "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>"
+          # $newContent = $newContent -replace "<stringProp name=`"LoopController.loops`">10</stringProp>", "<stringProp name=`"LoopController.loops`">1</stringProp>"
     - script: |
         $(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.6/bin/jmeter -n -t $(System.DefaultWorkingDirectory)/*.jmx -l $(System.DefaultWorkingDirectory)/test_summary.jtl
       displayName: 'Run JMeter Test'
