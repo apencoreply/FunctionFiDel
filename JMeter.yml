@@ -25,10 +25,9 @@ stages:
           Expand-Archive -Path $jmeterZipPath -DestinationPath $jmeterExtractPath -Force
     
     - script: |
-        $(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter -n -t $(System.DefaultWorkingDirectory)/*.jmx -l $(System.DefaultWorkingDirectory)/test_summary.jtl
+        $(System.DefaultWorkingDirectory)/jmeter/apache-jmeter-5.5/bin/jmeter -n -t $(System.DefaultWorkingDirectory)/*.jmx -l $(System.DefaultWorkingDirectory)/test_summary.jtl -Jthreads=10 -Jrampup=1 -Jloops=10
       displayName: 'Run JMeter Test'
       
-      # -Jthreads=100
     - script: |
         cat $(System.DefaultWorkingDirectory)/test_summary.jtl
       displayName: 'Explore results'
