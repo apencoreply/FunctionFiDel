@@ -24,17 +24,17 @@ stages:
           Invoke-WebRequest -Uri $jmeterZipUrl -OutFile $jmeterZipPath
           Expand-Archive -Path $jmeterZipPath -DestinationPath $jmeterExtractPath -Force
     
-    # - task: PowerShell@2
-    #   displayName: 'Set parameters runtime'
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       $filePath = "$(System.DefaultWorkingDirectory)/FiDelTest.jmx"
-    #       $content = Get-Content -Path $filePath -Raw
+    - task: PowerShell@2
+      displayName: 'Set parameters runtime'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $filePath = "$(System.DefaultWorkingDirectory)/FiDelTest.jmx"
+          $content = Get-Content -Path $filePath -Raw
 
-    #       $newContent = $content -replace "<stringProp name=`"ThreadGroup.num_threads`">10</stringProp>", "<stringProp name=`"ThreadGroup.num_threads`">3</stringProp>"
+          $newContent = $content -replace "<stringProp name=`"ThreadGroup.num_threads`">10</stringProp>", "<stringProp name=`"ThreadGroup.num_threads`">3</stringProp>"
 
-    #       $newContent | Set-Content -Path $filePath
+          $newContent | Set-Content -Path $filePath
 
         # $newContent = $newContent -replace "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>", "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>"
         # $newContent = $newContent -replace "<stringProp name=`"LoopController.loops`">10</stringProp>", "<stringProp name=`"LoopController.loops`">1</stringProp>"
