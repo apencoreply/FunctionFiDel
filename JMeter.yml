@@ -33,8 +33,8 @@ stages:
           $content = Get-Content -Path $filePath -Raw
 
           $newContent = $content -replace "<stringProp name=`"ThreadGroup.num_threads`">10</stringProp>", "<stringProp name=`"ThreadGroup.num_threads`">30</stringProp>"
-        $newContent = $newContent -replace "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>", "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>"
-        $newContent = $newContent -replace "<stringProp name=`"LoopController.loops`">10</stringProp>", "<stringProp name=`"LoopController.loops`">2</stringProp>"
+          $newContent = $newContent -replace "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>", "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>"
+          $newContent = $newContent -replace "<stringProp name=`"LoopController.loops`">10</stringProp>", "<stringProp name=`"LoopController.loops`">2</stringProp>"
 
           $newContent | Set-Content -Path $filePath
 
