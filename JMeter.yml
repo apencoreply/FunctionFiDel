@@ -17,7 +17,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          $jmeterZipUrl = 'https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.zip'
+          $jmeterZipUrl = 'https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.zip'
           $jmeterZipPath = '$(System.DefaultWorkingDirectory)/jmeter.zip'
           $jmeterExtractPath = '$(System.DefaultWorkingDirectory)/jmeter'
 
