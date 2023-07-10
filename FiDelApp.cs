@@ -20,10 +20,10 @@ namespace FiDelApp
     public static class FiDelApp
     {
         private static readonly HttpClient httpClient = new HttpClient();
-        private static readonly string cosmosDbEndpoint = Environment.GetEnvironmentVariable("DBENDPOINT");
-        private static readonly string cosmosDbKey = Environment.GetEnvironmentVariable("DBKEY");
-        private static readonly string databaseId = Environment.GetEnvironmentVariable("DBID");
-        private static readonly string containerId = Environment.GetEnvironmentVariable("CONTAINERID");
+        private static readonly string cosmosDbEndpoint = Environment.GetEnvironmentVariable("DBENDPOINT", EnvironmentVariableTarget.Process);
+        private static readonly string cosmosDbKey = Environment.GetEnvironmentVariable("DBKEY", EnvironmentVariableTarget.Process);
+        private static readonly string databaseId = Environment.GetEnvironmentVariable("DBID", EnvironmentVariableTarget.Process);
+        private static readonly string containerId = Environment.GetEnvironmentVariable("CONTAINERID", EnvironmentVariableTarget.Process);
         private static readonly CosmosClient cosmosClient = new CosmosClient(cosmosDbEndpoint, cosmosDbKey);
         private static readonly Microsoft.Azure.Cosmos.Container cosmosContainer = cosmosClient.GetContainer(databaseId, containerId);
 

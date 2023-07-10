@@ -1,0 +1,150 @@
+<mxfile host="app.diagrams.net" modified="2023-07-05T15:24:23.058Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.67" etag="6sSIHNRRg9g8ZwEiWfRj" version="21.5.2" type="github">
+  <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
+    <mxGraphModel dx="1050" dy="573" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="r-QJJK2opc04MjOTLEjq-28" value="User" style="shape=umlActor;verticalLabelPosition=top;verticalAlign=bottom;html=1;labelPosition=center;align=center;" parent="1" vertex="1">
+          <mxGeometry x="90" y="20" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-31" value="OpenAI API" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="470" y="20" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-33" value="Notification (Email)" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="630" y="20" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;" parent="1" source="r-QJJK2opc04MjOTLEjq-60" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="510" as="targetPoint" />
+            <mxPoint x="530.5" y="80" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="531" y="335" />
+              <mxPoint x="530" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="510" as="targetPoint" />
+            <mxPoint x="105" y="95" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="105" y="95" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="510" as="targetPoint" />
+            <mxPoint x="689.5" y="80" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-61" value="Call OpenAI API" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" target="r-QJJK2opc04MjOTLEjq-60" edge="1">
+          <mxGeometry x="0.0566" relative="1" as="geometry">
+            <mxPoint x="370" y="280" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="441" y="280" />
+              <mxPoint x="762" y="275" />
+            </Array>
+            <mxPoint as="offset" />
+            <mxPoint x="533" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-62" value="Get Response" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" source="r-QJJK2opc04MjOTLEjq-60" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="345" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-71" value="Push API Send Notification" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="0.0196" relative="1" as="geometry">
+            <mxPoint x="370" y="410" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="370" y="410" />
+            </Array>
+            <mxPoint as="offset" />
+            <mxPoint x="690" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-72" value="Send Notification Test Report" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="0.0638" y="-5" relative="1" as="geometry">
+            <mxPoint x="106" y="460" as="targetPoint" />
+            <mxPoint as="offset" />
+            <mxPoint x="687" y="460" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-73" value="Get OpenAI Response" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="0.1429" width="60" relative="1" as="geometry">
+            <mxPoint x="105" y="490" as="sourcePoint" />
+            <mxPoint x="690" y="490" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;" parent="1" source="4MlkPoDC-iZfPtkaoR5_-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="215" y="510" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="215" y="470" />
+              <mxPoint x="215" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-3" value="Repository Code Management (GitHub.com)" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="160" y="20" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-4" value="Azure DevOps Pipeline" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="310" y="20" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="371" y="510" as="targetPoint" />
+            <mxPoint x="370.5" y="80" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="370" y="335" />
+              <mxPoint x="370" y="335" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-7" value="Push Commit" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="60" relative="1" as="geometry">
+            <mxPoint x="103" y="135" as="sourcePoint" />
+            <mxPoint x="218" y="135" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-8" value="Trigger Running CI" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="215" y="165" as="sourcePoint" />
+            <mxPoint x="370" y="165" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-9" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="210" y="190" width="10" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-10" value="check new commit" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" target="4MlkPoDC-iZfPtkaoR5_-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="210" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="285" y="205" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-11" value="send New commit" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" source="4MlkPoDC-iZfPtkaoR5_-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="255" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4MlkPoDC-iZfPtkaoR5_-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;endFill=0;" parent="1" target="r-QJJK2opc04MjOTLEjq-60" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="440" as="targetPoint" />
+            <mxPoint x="530.5" y="80" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="530" y="250" />
+              <mxPoint x="530" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r-QJJK2opc04MjOTLEjq-60" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="525" y="270" width="10" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
