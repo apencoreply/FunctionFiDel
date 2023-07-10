@@ -32,7 +32,7 @@ stages:
           $filePath = "$(System.DefaultWorkingDirectory)/FiDelTest.jmx"
           $content = Get-Content -Path $filePath -Raw
 
-          $newContent = $content -replace "<stringProp name=`"ThreadGroup.num_threads`">10</stringProp>", "<stringProp name=`"ThreadGroup.num_threads`">30</stringProp>"
+          $newContent = $content -replace "<stringProp name=`"ThreadGroup.num_threads`">10</stringProp>", "<stringProp name=`"ThreadGroup.num_threads`">3</stringProp>"
 
           $newContent | Set-Content -Path $filePath
 
