@@ -36,8 +36,8 @@ stages:
 
           $newContent | Set-Content -Path $filePath
 
-          # $newContent = $newContent -replace "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>", "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>"
-          # $newContent = $newContent -replace "<stringProp name=`"LoopController.loops`">10</stringProp>", "<stringProp name=`"LoopController.loops`">1</stringProp>"
+        # $newContent = $newContent -replace "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>", "<stringProp name=`"ThreadGroup.ramp_time`">1</stringProp>"
+        # $newContent = $newContent -replace "<stringProp name=`"LoopController.loops`">10</stringProp>", "<stringProp name=`"LoopController.loops`">1</stringProp>"
     
     - script: |
         cat $(System.DefaultWorkingDirectory)/*.jmx
