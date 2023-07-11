@@ -19,13 +19,13 @@ variables:
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
 
-resources:
-  repositories:
-    - repository: devopsempowertool
-      type: github
-      name: DevOpsEmpowerTool
-      ref: main
-      endpoint: https://github.com/apencoreply/DevOpsEmpowerTool.git
+# resources:
+#   repositories:
+#     - repository: devopsempowertool
+#       type: github
+#       name: DevOpsEmpowerTool
+#       ref: main
+#       endpoint: https://github.com/apencoreply/DevOpsEmpowerTool.git
 
 stages:
 - stage: Build
