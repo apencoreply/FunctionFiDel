@@ -8,7 +8,7 @@ trigger:
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: 'ed7d4ce5-655e-4eb0-819b-8774720c7d08'
+  azureSubscription: 'SCPenco'
 
   # Function app name
   functionAppName: 'FiDelApp'
