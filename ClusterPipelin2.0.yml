@@ -58,6 +58,9 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-- template: deploy.yml@devopsempowertool
-- template: JMeter.yml@devopsempowertool
-- template: ChatGPT.yml@devopsempowertool
+- template: deploy.yml
+#@devopsempowertool
+- template: JMeter.yml
+#@devopsempowertool
+- template: ChatGPT.yml
+#@devopsempowertool
