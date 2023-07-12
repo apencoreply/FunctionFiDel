@@ -46,13 +46,27 @@ resources:
 
 
 stages:
-- stage: Build
+- stage: BuildAndDeploy
   condition: eq('${{ parameters.Build }}', 'true')
-  displayName: Build stage
+  displayName: Build and Deploy stage
 
   jobs:
+  - job: Restore
+    displayName: Restore
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: 'restore'
+        projects: |
+          $(workingDirectory)/*.csproj
+
   - job: Build
     displayName: Build
+    dependsOn: Restore
     pool:
       vmImage: $(vmImageName)
 
@@ -77,9 +91,59 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
+  - deployment: Deploy
+    displayName: Deploy
+    dependsOn: Build
+    environment: 'development'
+    pool:
+      vmImage: $(vmImageName)
+
+    strategy:
+      runOnce:
+        deploy:
+
+          steps:
+          - task: AzureFunctionApp@1
+            displayName: 'Azure functions app deploy'
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              appType: functionApp
+              appName: $(functionAppName)
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+# - stage: Build
+#   condition: eq('${{ parameters.Build }}', 'true')
+#   displayName: Build stage
+
+#   jobs:
+#   - job: Build
+#     displayName: Build
+#     pool:
+#       vmImage: $(vmImageName)
+
+#     steps:
+#     - task: DotNetCoreCLI@2
+#       displayName: Build
+#       inputs:
+#         command: 'build'
+#         projects: |
+#           $(workingDirectory)/*.csproj
+#         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+
+#     - task: ArchiveFiles@2
+#       displayName: 'Archive files'
+#       inputs:
+#         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output'
+#         includeRootFolder: false
+#         archiveType: zip
+#         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+#         replaceExistingArchive: true
+
+#     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+#       artifact: drop
+
 
 # - template: deploy.yml
-  - template: deploy.yml@templates
+  # - template: deploy.yml@templates
 # - template: JMeter.yml
   - template: JMeter.yml@templates
 # - template: ChatGPT.yml
