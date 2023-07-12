@@ -20,14 +20,14 @@ variables:
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
 
 parameters:
-- name: Build
+- name: BuildAndDeploy
   displayName: Build Azure function
   type: boolean
   default: true
-- name: Deploy
-  displayName: Deploy Azure function
-  type: boolean
-  default: true
+# - name: Deploy
+#   displayName: Deploy Azure function
+#   type: boolean
+#   default: true
 - name: JMeter
   displayName: Run JMeter test
   type: boolean
@@ -47,7 +47,7 @@ resources:
 
 stages:
 - stage: BuildAndDeploy
-  condition: eq('${{ parameters.Build }}', 'true')
+  condition: eq('${{ parameters.BuildAndDeploy }}', 'true')
   displayName: Build and Deploy stage
 
   jobs:
@@ -146,7 +146,7 @@ stages:
 
 - stage: JMeterTest
   displayName: JMeter Test stage
-  dependsOn: Deploy
+  dependsOn: BuildAndDeploy
   condition: and(succeeded(), eq('${{ parameters.JMeter }}', 'true'))
 # - template: JMeter.yml
   jobs:
