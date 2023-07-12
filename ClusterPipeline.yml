@@ -141,11 +141,22 @@ stages:
 #     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
 #       artifact: drop
 
-
 # - template: deploy.yml
   # - template: deploy.yml@templates
+
+- stage: JMeterTest
+  displayName: JMeter Test stage
+  dependsOn: Deploy
+  condition: and(succeeded(), eq('${{ parameters.JMeter }}', 'true'))
 # - template: JMeter.yml
-  - template: JMeter.yml@templates
+  jobs:
+    - template: JMeter.yml@templates
+
+- stage: ChatGPT
+  displayName: ChatGPT stage
+  dependsOn: JMeterTest
+  condition: and(succeeded(), eq('${{ parameters.ChatGPT }}', 'true'))
 # - template: ChatGPT.yml
+  jobs:
   - template: ChatGPT.yml@templates
 
