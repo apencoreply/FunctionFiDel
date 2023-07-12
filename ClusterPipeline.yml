@@ -19,6 +19,24 @@ variables:
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
 
+parameters:
+- name: Build
+  displayName: Build Azure function
+  type: boolean
+  default: true
+- name: Deploy
+  displayName: Deploy Azure function
+  type: boolean
+  default: true
+- name: JMeter
+  displayName: Run JMeter test
+  type: boolean
+  default: true
+- name: ChatGPT
+  displayName: Run ChatGPT analysis
+  type: boolean
+  default: true
+
 # resources:
 #   repositories:
 #     - repository: devopsempowertool
@@ -29,6 +47,7 @@ variables:
 
 stages:
 - stage: Build
+  condition: eq('${{ parameters.Build }}', 'true')
   displayName: Build stage
 
   jobs:
