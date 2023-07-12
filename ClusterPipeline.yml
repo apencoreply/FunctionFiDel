@@ -39,10 +39,9 @@ parameters:
 
 resources:
   repositories:
-    - repository: devopsempowertool
+    - repository: templates
       type: github
-      name: DevOpsEmpowerTool
-      ref: main
+      name: apencoreply/DevOpsEmpowerTool
       endpoint: https://github.com/apencoreply/DevOpsEmpowerTool.git
 
 
@@ -81,8 +80,8 @@ stages:
     - checkout: devopsempowertool
 
 
-- template: deploy.yml
-# - template: deploy.yml@devopsempowertool
+# - template: deploy.yml
+- template: deploy.yml@devopsempowertool
 - template: JMeter.yml
 # - template: JMeter.yml@devopsempowertool
 - template: ChatGPT.yml
