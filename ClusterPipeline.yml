@@ -43,7 +43,7 @@ resources:
       type: github
       name: DevOpsEmpowerTool
       ref: main
-      endpoint: https://github.com/apencoreply/DevOpsEmpowerTool.git
+      endpoint: https://github.com/apencoreply/DevOpsEmpowerTool
 
 stages:
 - stage: Build
@@ -77,8 +77,8 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-- template: deploy.yml
-# - template: deploy.yml@devopsempowertool
+# - template: deploy.yml
+- template: deploy.yml@devopsempowertool
 - template: JMeter.yml
 # - template: JMeter.yml@devopsempowertool
 - template: ChatGPT.yml
