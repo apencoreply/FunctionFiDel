@@ -111,6 +111,7 @@ stages:
   displayName: JMeter Test stage
   dependsOn: BuildAndDeploy
   condition: and(succeeded(), eq('${{ parameters.JMeter }}', 'true'))
+  
   jobs:
     - template: JMeter.yml@templates
       parameters:
