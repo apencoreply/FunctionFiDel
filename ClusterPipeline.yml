@@ -113,6 +113,10 @@ stages:
   condition: and(succeeded(), eq('${{ parameters.JMeter }}', 'true'))
   jobs:
     - template: JMeter.yml@templates
+      parameters:
+        threads: '25'
+        rampup: '1'
+        loops: '2'
 
 - stage: ChatGPT
   displayName: ChatGPT stage
