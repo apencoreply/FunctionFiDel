@@ -24,10 +24,6 @@ parameters:
   displayName: Build Azure function
   type: boolean
   default: true
-# - name: Deploy
-#   displayName: Deploy Azure function
-#   type: boolean
-#   default: true
 - name: JMeter
   displayName: Run JMeter test
   type: boolean
@@ -110,45 +106,11 @@ stages:
               appType: functionApp
               appName: $(functionAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-# - stage: Build
-#   condition: eq('${{ parameters.Build }}', 'true')
-#   displayName: Build stage
-
-#   jobs:
-#   - job: Build
-#     displayName: Build
-#     pool:
-#       vmImage: $(vmImageName)
-
-#     steps:
-#     - task: DotNetCoreCLI@2
-#       displayName: Build
-#       inputs:
-#         command: 'build'
-#         projects: |
-#           $(workingDirectory)/*.csproj
-#         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
-
-#     - task: ArchiveFiles@2
-#       displayName: 'Archive files'
-#       inputs:
-#         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output'
-#         includeRootFolder: false
-#         archiveType: zip
-#         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-#         replaceExistingArchive: true
-
-#     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-#       artifact: drop
-
-# - template: deploy.yml
-  # - template: deploy.yml@templates
 
 - stage: JMeterTest
   displayName: JMeter Test stage
   dependsOn: BuildAndDeploy
   condition: and(succeeded(), eq('${{ parameters.JMeter }}', 'true'))
-# - template: JMeter.yml
   jobs:
     - template: JMeter.yml@templates
 
@@ -156,7 +118,6 @@ stages:
   displayName: ChatGPT stage
   dependsOn: JMeterTest
   condition: and(succeeded(), eq('${{ parameters.ChatGPT }}', 'true'))
-# - template: ChatGPT.yml
   jobs:
   - template: ChatGPT.yml@templates
 
