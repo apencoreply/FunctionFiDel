@@ -19,6 +19,8 @@ variables:
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
 
+  group: MySecrets
+
 parameters:
 - name: BuildAndDeploy
   displayName: Build Azure function
