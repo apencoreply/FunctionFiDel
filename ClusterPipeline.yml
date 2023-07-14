@@ -131,7 +131,7 @@ stages:
     parameters:
       tokens: '800'
       temperature: '0.7'      
-      EmailUsernameRecipient: $[variables['MySecrets.EmailUsernameRecipient']]
-      EmailPassword: $[variables['MySecrets.emailPassword']]
-      EmailUsername: $[variables['MySecrets.emailUsername']]
+      EmailUsernameRecipient: $(MySecrets.EmailUsernameRecipient)
+      EmailPassword: $(MySecrets.emailPassword)
+      EmailUsername: $(MySecrets.emailUsername)
 
