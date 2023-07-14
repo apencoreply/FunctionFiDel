@@ -19,7 +19,7 @@ variables:
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
 
-  group: MySecrets
+  # group: MySecrets
 
 parameters:
 - name: BuildAndDeploy
@@ -130,8 +130,8 @@ stages:
   - template: ChatGPT.yml@templates
     parameters:
       tokens: '800'
-      temperature: '0.7'
-      EmailPassword: $(EmailPassword)
-      EmailUsername: $(EmailUsername)
-      EmailUsernameRecipient: $(EmailUsernameRecipient)
+      temperature: '0.7'      
+      EmailUsernameRecipient: $[variables['MySecrets.EmailUsernameRecipient']]
+      EmailPassword: $[variables['MySecrets.emailPassword']]
+      EmailUsername: $[variables['MySecrets.emailUsername']]
 
