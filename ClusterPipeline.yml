@@ -19,7 +19,7 @@ variables:
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
 
-  # group: MySecrets
+  group: MySecrets
 
 parameters:
 - name: BuildAndDeploy
@@ -131,7 +131,7 @@ stages:
     parameters:
       tokens: '800'
       temperature: '0.7'      
-      EmailUsernameRecipient: $(MySecrets.EmailUsernameRecipient)
-      EmailPassword: $(MySecrets.emailPassword)
-      EmailUsername: $(MySecrets.emailUsername)
+      EmailUsernameRecipient: $(EmailUsernameRecipient)
+      EmailPassword: $(emailPassword)
+      EmailUsername: $(emailUsername)
 
