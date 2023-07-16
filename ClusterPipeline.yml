@@ -109,8 +109,9 @@ stages:
 
 - stage: JMeterTest
   displayName: JMeter Test stage
-  dependsOn: BuildAndDeploy
-  condition: and(succeeded(), eq('${{ parameters.JMeter }}', 'true'))
+  # dependsOn: BuildAndDeploy
+  condition: eq('${{ parameters.JMeter }}', 'true')
+  # condition: and(succeeded(), eq('${{ parameters.JMeter }}', 'true'))
 
   jobs:
   - template: JMeter.yml@templates
@@ -121,8 +122,9 @@ stages:
 
 - stage: ChatGPT
   displayName: ChatGPT stage
-  dependsOn: JMeterTest
-  condition: and(succeeded(), eq('${{ parameters.ChatGPT }}', 'true'))
+  # dependsOn: JMeterTest
+  # condition: and(succeeded(), eq('${{ parameters.ChatGPT }}', 'true'))
+  condition: eq('${{ parameters.ChatGPT }}', 'true')
 
   jobs:
   - template: ChatGPT.yml@templates
