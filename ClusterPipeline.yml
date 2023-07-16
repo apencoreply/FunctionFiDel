@@ -134,6 +134,8 @@ stages:
       apiKey: $(ApiKey)
       apiUrl: $(ApiUrl)
       EmailUsernameRecipient: $(EmailUsernameRecipient)
-      EmailPassword: $(emailPassword)
-      EmailUsername: $(email)
+      EmailPassword: $(EmailPassword)
+      EmailUsername: $(EmailUsername)
+
+
 
