@@ -130,8 +130,10 @@ stages:
   - template: ChatGPT.yml@templates
     parameters:
       tokens: '800'
-      temperature: '0.7'      
+      temperature: '0.7'
+      apiKey: $(ApiKey)
+      apiUrl: $(ApiUrl)
       EmailUsernameRecipient: $(EmailUsernameRecipient)
       EmailPassword: $(emailPassword)
-      EmailUsername: $(emailUsername)
+      EmailUsername: $(email)
 
