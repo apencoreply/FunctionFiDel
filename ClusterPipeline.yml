@@ -19,8 +19,6 @@ variables:
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
 
-  group: MySecrets
-
 parameters:
 - name: BuildAndDeploy
   displayName: Build Azure function
@@ -136,6 +134,8 @@ stages:
       EmailUsernameRecipient: $(EmailUsernameRecipient)
       EmailPassword: $(EmailPassword)
       EmailUsername: $(EmailUsername)
+  variables:
+  - group: MySecrets
 
 
 
