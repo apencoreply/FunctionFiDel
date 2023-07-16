@@ -134,5 +134,6 @@ stages:
       EmailUsernameRecipient: $(EmailUsernameRecipient)
       EmailPassword: $(EmailPassword)
       EmailUsername: $(EmailUsername)
+      APIKEY: $(APIKEY)
   variables:
   - group: MySecrets
