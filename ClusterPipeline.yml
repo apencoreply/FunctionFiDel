@@ -23,7 +23,7 @@ parameters:
 - name: BuildAndDeploy
   displayName: Build Azure function
   type: boolean
-  default: true
+  default: false
 - name: JMeter
   displayName: Run JMeter test
   type: boolean
