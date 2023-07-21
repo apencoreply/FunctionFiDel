@@ -137,5 +137,6 @@ stages:
       EmailPassword: $(EmailPassword)
       EmailUsername: $(EmailUsername)
       EmailAPIKEY: $(EmailAPIKEY)
+      caption: "FiDelApp Message"
   variables:
   - group: MySecrets
