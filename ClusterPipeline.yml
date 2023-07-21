@@ -138,6 +138,6 @@ stages:
       EmailUsername: $(EmailUsername)
       EmailAPIKEY: $(EmailAPIKEY)
       caption: "FiDelApp Message"
-      chatid: "5101252591"
+      chatid: "549538016"
   variables:
   - group: MySecrets
