@@ -145,7 +145,7 @@ stages:
     parameters:  
       threads: '100'  
       rampup: '1'    
-      loops: '100'
+      loops: '1000'
   
   
 - stage: ChatGPT
