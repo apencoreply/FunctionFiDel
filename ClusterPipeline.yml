@@ -21,7 +21,7 @@ variables:
 
 parameters:
 - name: BuildAndDeploy
-  displayName: Build Azure function
+  displayName: Build And Deploy Azure function
   type: boolean
   default: false
 - name: JMeter
