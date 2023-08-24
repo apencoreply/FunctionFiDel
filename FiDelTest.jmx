@@ -137,7 +137,7 @@
                 <sentBytes>true</sentBytes>
               </value>
             </objProp>
-            <stringProp name="filename">test_summary.jtl</stringProp>
+            <stringProp name="filename"></stringProp>
           </ResultCollector>
           <hashTree/>
         </hashTree>
