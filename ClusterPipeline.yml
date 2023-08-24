@@ -154,7 +154,7 @@ stages:
   jobs:  
   - template: ChatGPT.yml@templates  
     parameters:  
-      tokens: '8000'  
+      tokens: '4000'  
       temperature: '0.7'  
       model: 'GPT3'
       workingDir: $(workingDirectory)
