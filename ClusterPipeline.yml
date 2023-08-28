@@ -145,7 +145,7 @@ stages:
     parameters:  
       threads: '100'  
       rampup: '1'    
-      loops: '10'
+      loops: '100'
   
   
 - stage: ChatGPT
@@ -158,7 +158,7 @@ stages:
       temperature: '0.7'  
       model: 'GPT4'
       workingDir: $(workingDirectory)
-      caption: '100th10u14ktGPt4-PostAPI-np'
+      caption: '100th100u14ktGPt4-PostAPI-np'
       chatid: '549538016'
       azSubscription: 'SCPenco'
 
