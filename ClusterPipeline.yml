@@ -143,7 +143,7 @@ stages:
   jobs:  
   - template: JMeter.yml@templates  
     parameters:  
-      threads: '100'  
+      threads: '10'  
       rampup: '1'    
       loops: '10'
   
