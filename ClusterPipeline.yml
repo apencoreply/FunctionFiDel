@@ -143,9 +143,9 @@ stages:
   jobs:  
   - template: JMeter.yml@templates  
     parameters:  
-      threads: '10'  
+      threads: '100'  
       rampup: '1'    
-      loops: '10'
+      loops: '100'
   
   
 - stage: ChatGPT
